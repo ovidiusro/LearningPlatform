@@ -1,0 +1,58 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Send Email</title>
+</head>
+<body>
+<div>
+    <h3 th:text="${headerText}">${headerText}</h3>
+    <form method="POST" th:object="${mailObject}" >
+        <fieldset>
+            <div style="float:left;">
+                <table cellspacing="0" width="300">
+                    <tr>
+                        <th>
+                            <label for="input_to">To</label></th>
+                        <td>
+                        <input th:field="*{to}"   id="input_to" type="email"/>
+
+                            <small>Enter email address</small><br/>
+                            <ul>
+                                <li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label for="input_subject">Subject</label></th>
+                        <td>
+                            <input th:field="*{subject}" id="input_subject"/>
+                            <small>Enter the subject</small><br/>
+                            <ul>
+                                <li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><label for="input_text">${messageLabel}:</label></th>
+                        <td>
+                            <textarea th:field="*{text}" rows="5" cols="50" id="input_text"/>
+                            <ul>
+                                <li th:each="err : ${#fields.errors('*')}" th:text="${err}" />
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td>
+                            <input type="submit" value="Send">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="float:left; word-wrap: break-word; margin-left: 50px; width: 400px; color: grey">
+                ${additionalInfo}
+            </div>
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>

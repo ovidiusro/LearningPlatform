@@ -1,0 +1,7 @@
+<div *ngIf="isLogged">
+  <app-home-private></app-home-private>
+</div>
+
+<div *ngIf="!isLogged">
+  <app-home-public></app-home-public> 
+</div>

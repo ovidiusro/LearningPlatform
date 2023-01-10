@@ -1,0 +1,83 @@
+<div class="sign-up__container">
+  <form class="sign-up-wrapper" [formGroup]="updateLessonForm" (ngSubmit)="updateLesson()">
+
+      <div class="title"> Update {{lesson?.title}} </div>
+
+    <div class="errorForm">
+      <p>{{errorMsg}}</p>
+    </div>
+    <div class="msg">
+      <p>{{msg}}</p>
+    </div>
+
+    <div class="input">
+      <label class="center form--label">Title</label>
+      <div class="center" *ngIf="submitted && f?.title.errors">
+          <div *ngIf="f.title.errors.minlength" class="errorLable">Minimum length of your title should be at least
+            three characters</div>
+          <div *ngIf="f.title.errors.maxlength" class="errorLable">Maximum length of your title should be at most 100
+            characters</div>
+      </div>
+      <input type="text" value="{{lesson?.title}}" formControlName="title" placeholder="Title" />
+
+    </div>
+
+    <div class="input">
+      <label class="center form--label">Lesson number</label>
+      <div class="center" *ngIf="submitted && f?.orderNumber.errors">
+          <div *ngIf="f.orderNumber.errors.pattern" class="errorLable">'Lesson number' must be a natural number </div>
+      </div>
+      <input type="number" value="{{lesson?.orderNumber}}" min="1" max="100" formControlName="orderNumber" placeholder="You can order your lesson" />
+    </div>
+
+    <div class="input">
+      <label class="center form--label">Short Description</label>
+      <div class="center" *ngIf="submitted && f?.shortDescription.errors">
+        <div *ngIf="f.shortDescription.errors.required" class="errorLable">Short description is required</div>
+        <div *ngIf="f.shortDescription.errors.minlength" class="errorLable">Minimum length of your description should
+          be at least three characters</div>
+        <div *ngIf="f.shortDescription.errors.maxLength" class="errorLable">Maximum length of your description should
+          be at most 1000 characters</div>
+      </div>
+      <textarea class="short-description" type="text" value="{{lesson?.shortDescription}}" formControlName="shortDescription" placeholder="A breaf description of your lesson" ></textarea>
+    </div>
+
+    <div class="input">
+      <label class="center form--label"> Body of your lesson</label>
+      <div class="center" *ngIf="submitted && f?.body.errors">
+        <div *ngIf="f.body.errors.required" class="errorLable">Body of the lesson is required</div>
+        <div *ngIf="f.body.errors.minlength" class="errorLable">Minimum length of your body should be at least 10
+          characters</div>
+        <div *ngIf="f.body.errors.maxlength" class="errorLable">Maximum length of your body should be most 50000
+          characters</div>
+      </div>
+      <textarea class="long-description" type="text" value="{{lesson?.body}}" placeholder="Here you insert the body of your lesson" formControlName="body" ></textarea>
+    </div>
+
+
+    <div class="center">
+    <button class="register--button ">Upload</button>
+</div>
+  </form>
+
+  <div class="sign-up-wrapper">
+          <div class="upload-file__container">
+            <div class="title center"> Upload Video (and if exists remove the old one)</div>
+            <div class="errorForm">
+                <p>{{uploadErrorMsg}}</p>
+              </div>
+              <div class="msg">
+                <p>{{uploadMsg}}</p>
+              </div>
+            <div class="upload-file">
+              <label class="upload-file--label">Lesson's video</label>
+              <app-upload-file (eventEmitter)="receiveEventForUploadVideo($event)"></app-upload-file>
+            </div>
+            <div class="center">
+            <button class="register--button" (click) = "uploadVideo()">Register Video</button>
+            </div>
+          </div>
+  
+</div>
+
+</div>

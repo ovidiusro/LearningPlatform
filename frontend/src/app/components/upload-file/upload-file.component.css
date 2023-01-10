@@ -1,0 +1,117 @@
+.input{
+    display:flex;
+    flex-direction: column;
+    height: 15%;
+    min-height: 7vh;
+}
+.input input{
+    flex-grow: 1;
+
+    background: inherit;
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-color: rgb(136, 136, 136);
+
+    font-size: 150%;
+    padding: 0  0 0 5%;
+    outline: none;
+}
+
+ input:focus::placeholder {
+   font-size: 100%;
+}
+
+ input::placeholder{
+font-family: "Roboto",sans-serif;
+font-size: 15px;
+}
+
+ .mybutton{
+
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+
+    height: 5%;
+    width: 80%;
+
+    margin: 4% auto 4% auto;
+    
+    padding: 3% 0% 3% 0%;
+    outline: none;
+    font-family: "Roboto",sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.15rem;
+    background: inherit;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(136, 136, 136);
+
+    min-height: 5vh;
+    transition: background-color  0.5s ease-out, color  0.5s ease-out;
+    -webkit-transition: background-color  0.5s ease-out, color  0.5s ease-out;
+  }
+  .button--upload-file{
+    margin: 2% 2% 2% 2%;
+    height: 4%;
+    width: 46%;
+    padding: 3%;
+    outline: none;
+    font-family: "Roboto",sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.10rem;
+    min-height: 5vh;
+  }
+
+  .button--green{
+    background-color: #139617;
+    color: white;
+    transition: background-color  0.5s ease-out, color  0.5s ease-out;
+    -webkit-transition: background-color  0.5s ease-out, color  0.5s ease-out;
+  }
+  .button--red{
+    background-color:#974747;
+    color: white;
+    transition: background-color  0.5s ease-out, color  0.5s ease-out;
+    -webkit-transition: background-color  0.5s ease-out, color  0.5s ease-out;
+  }
+
+  .button--green:hover {
+    background-color:#2DD532;
+    color: black;
+  }
+  .button--red:hover {
+    background-color: #F01317;
+    color: black;
+  }
+
+  .mybutton:hover {
+    background-color: rgb(87, 87, 87);
+    color: rgb(194, 194, 194);
+  }
+  .progress--container{
+    margin: 3%;
+  }
+  .errorForm {
+    font-weight: bold;
+    color:#974747;
+    text-align: center;
+    margin:0;
+    padding: 0;
+  }
+  .msg {
+    font-weight: bold;
+    color:#449251;
+    text-align: center;
+    margin:0;
+    padding: 0;
+  }
+
+  .errorLable {
+    font-weight: bold;
+    color:#974747;
+    margin:0;
+    padding: 0% , 0% ,0%, 5%;
+  }
+  

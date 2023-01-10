@@ -1,0 +1,18 @@
+<nav class="main__nav dark-transition">
+
+  <a class="nav__button" routerLink="group-details/{{group?.id}}/overview" routerLinkActive='active'>
+    Overview
+  </a>
+  <a class="nav__button" routerLink="update" routerLinkActive='active'>
+    Edit Group Profile
+  </a>
+  <a class="nav__button" routerLink="lessons" routerLinkActive='active'>
+    Manage lessons
+  </a>
+</nav>
+
+<div class="my__container">
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+</div>

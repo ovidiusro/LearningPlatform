@@ -1,0 +1,52 @@
+<div >
+      <div class="msg">
+            <p>{{msg}}</p>
+      </div>
+      <form *ngIf="!metadataCreated" [formGroup]="metadataForm" (ngSubmit)="createFileMetadata()">
+            <div class="errorForm">
+                  <p>{{errorMsg}}</p>
+            </div>
+            <div class="input">
+                  <div *ngIf="submitted && f.name.errors">
+                        <div *ngIf="f.name.errors.minlength" class="errorLable">Minimum length of file's name
+                              should be
+                              at least three characters</div>
+                  </div>
+                  <input type="text" formControlName="name" placeholder="Name of file" />
+            </div>
+
+            <div class="input">
+                  <div *ngIf="submitted && f.summary.errors">
+                        <div *ngIf="f.summary.errors.minlength" class="errorLable">Minimum length of file's
+                              summary
+                              should be at least three characters</div>
+                  </div>
+                  <input type="text" formControlName="summary" placeholder="Some keywords" />
+            </div>
+
+            <button class="mybutton">Create file</button>
+      </form>
+</div>
+<div *ngIf="metadataCreated">
+      <div id="fileSelector">
+            <input type="file" name="fileUplaod" id="fileUpload" ng2FileSelect [uploader]="uploader">
+      </div>
+      <div class="uploadList" *ngFor="let item of uploader.queue ; first as isFirst">
+
+            <div class="raw">
+                  <div *ngIf="isFirst" class="progress--container">
+                        <div class="progress">
+                              <div class="progress-bar bg-success" [ngStyle]="{'width':item.progress+'%'}"></div>
+                        </div>
+                  </div>
+            </div>
+
+            <div class="raw">
+                  <div *ngIf="isFirst" class="buttons--upload-file">
+                        <button type="button" class="button--upload-file button--green" (click)="item.upload()">Upload</button>
+                        <button type="button" class="button--upload-file button--red" (click)="item.remove()">Cancel</button>
+                  </div>
+            </div>
+      </div>
+      <button (click)="back()" type="button" class="mybutton"> Back </button>
+</div>

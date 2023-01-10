@@ -1,0 +1,12 @@
+.root{
+    margin : 10%;
+    display: flex;
+    justify-content: center;
+}
+.message_error{
+    padding: 1%;
+
+    font-size: 3.4ch;
+    color: #D8000C;
+    background-color: #FFD2D2;
+}

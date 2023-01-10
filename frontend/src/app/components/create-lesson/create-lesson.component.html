@@ -1,0 +1,48 @@
+<div class="sign-up__container">
+    <form class="sign-up-wrapper" [formGroup]="lessonForm" (ngSubmit)="registerLesson()">
+
+    <div class="title"> Create Lesson</div>
+
+        <div class="errorForm">
+            <p>{{errorMsg}}</p>
+        </div>
+        <div class="msg">
+            <p>{{msg}}</p>
+        </div>
+
+        <div class="input">
+            <div class="center" *ngIf="submitted && f.title.errors">
+                <div *ngIf="f.title.errors.required" class="errorLable">Title is required</div>
+                <div *ngIf="f.title.errors.minlength" class="errorLable">Minimum length of your title should be at least three characters</div>
+                <div *ngIf="f.title.errors.maxlength" class="errorLable">Maximum length of your title should be at most 100 characters</div>
+            </div>
+            <input type="text" formControlName="title" placeholder="Title" />
+        </div>
+
+        <div class="input">
+            <div class="center" *ngIf="submitted && f.orderNumber.errors">
+                <div *ngIf="f.orderNumber.errors.required" class="errorLable">Number of the lesson is required</div>
+            </div>
+            <input type="number" min="1" max="100" formControlName="orderNumber" placeholder="Lesson number" />
+        </div>
+        <div class="input">
+            <div  class="center" *ngIf="submitted && f.shortDescription.errors">
+                <div *ngIf="f.shortDescription.errors.required" class="errorLable">Short description is required</div>
+                <div *ngIf="f.shortDescription.errors.minlength" class="errorLable">Minimum length of your description should be at least three characters</div>
+                <div *ngIf="f.shortDescription.errors.maxLength" class="errorLable">Maximum length of your description should be at most 1000 characters</div>
+            </div>
+            <textarea class="short-description" type="text" formControlName="shortDescription" placeholder="Short Description"></textarea>
+        </div>
+        <div class="input">
+            <div   class="center" *ngIf="submitted && f.body.errors">
+                <div *ngIf="f.body.errors.required" class="errorLable">Body of the lesson is required</div>
+                <div *ngIf="f.body.errors.minlength" class="errorLable">Minimum length of your body should be at least 10 characters</div>
+                <div *ngIf="f.body.errors.maxlength" class="errorLable">Maximum length of your body should be most 50000 characters</div>
+            </div>
+            <textarea class="long-description" type="text" formControlName="body" placeholder="Body of your lesson"></textarea>
+        </div>
+
+        <button>Register</button>
+    </form>
+
+</div>

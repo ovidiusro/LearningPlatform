@@ -1,0 +1,192 @@
+<div class="my-container">
+  <div class="two__container">
+
+    <div class="container__left">
+      <div class="center">
+        <img *ngIf="http" class="picture--round" src="{{http}}">
+        <img *ngIf="!http" class="picture--round" src="https://www.viadelvino.com/wp-content/uploads/2016/02/photo.jpg.png">
+
+      </div>
+      <div *ngIf="user.description" class="description">
+        <p>
+          {{user?.description}}
+        </p>
+      </div>
+    </div>
+
+    <div class="container__right">
+      <div *ngIf="user.name" class="label--nice">
+        <label>Name: {{user?.name}}</label>
+      </div>
+      <div *ngIf="user.profession" class="label--nice">
+        <label>Profession: {{user?.profession}}</label>
+      </div>
+      <div *ngIf="user.email" class="label--nice">
+        <label>Email : {{user?.email}}</label>
+      </div>
+      <div *ngIf="user.age" class="label--nice">
+        <label>Age : {{user?.age}}</label>
+      </div>
+      <div *ngIf="user.teachAt" class="label--nice">
+        <label>Teach at : {{user?.teachAt}}</label>
+      </div>
+      <div *ngIf="user.studyAt" class="label--nice">
+        <label>Study at : {{user?.studyAt}}</label>
+      </div>
+    </div>
+  </div>
+  <div  class="edit-profile__container">
+    <form  [formGroup]="updateProfileForm" (ngSubmit)="updateProfile()">
+
+      <div class="title center"> Edit Profile </div>
+
+      <div class="errorForm">
+        <p>{{errorMsg}}</p>
+      </div>
+      <div class="msg">
+        <p>{{msg}}</p>
+      </div>
+
+      <div class="input">
+        <label class="center form--label">Name</label>
+        <div class="center" *ngIf="f?.name.errors">
+          <div *ngIf="f.name.errors.minlength" class="errorLable">Minimum length of your name should be at least
+            three characters</div>
+          <div *ngIf="f.name.errors.maxlength" class="errorLable">Maximum length of your name should be at most
+            50
+            characters</div>
+        </div>
+        <input type="text"  formControlName="name" placeholder="{{user?.name}}" />
+      </div>
+      <div class="input">
+        <label class="center form--label">Username</label>
+        <div class="center" *ngIf="f?.username.errors">
+          <div *ngIf="f.username.errors.minlength" class="errorLable">Minimum length of your username should be at
+            least
+            three characters</div>
+          <div *ngIf="f.username.errors.maxlength" class="errorLable">Maximum length of your username should be at
+            most 50
+            characters</div>
+        </div>
+        <input type="text"  formControlName="username" placeholder="{{user?.username}}" />
+      </div>
+      <div></div>
+      <div class="input">
+        <label class="center form--label">Password</label>
+        <div class="center" *ngIf="f?.password.errors">
+          <div *ngIf="f.password.errors.minlength" class="errorLable">Minimum length of your password sould be at least
+            three characters</div>
+          <div *ngIf="f.password.errors.maxlength" class="errorLable">Maximum length of your password should be at
+            most 50
+            characters</div>
+        </div>
+        <input type="password" formControlName="password" placeholder="Password" />
+      </div>
+
+      <div class="input">
+          <label class="center form--label">Password Confirmation</label>
+          <div class="center" *ngIf="f?.confirmPassword.errors">
+            <div *ngIf="f.confirmPassword.errors.minlength" class="errorLable">Minimum length of your password confirmation sould be at least
+              three characters</div>
+            <div *ngIf="f.confirmPassword.errors.maxlength" class="errorLable">Maximum length of your  password confirmation should be at
+              most 50
+              characters</div>
+          </div>
+          <input type="password" formControlName="confirmPassword" placeholder="Confirm Password" />
+        </div>
+
+      <div class="input">
+        <label class="center form--label">Email</label>
+        <div class="center" *ngIf="f?.email.errors">
+          <div *ngIf="f.email.errors.minlength" class="errorLable">Minimum length of your email should be at least
+            three characters</div>
+          <div *ngIf="f.email.errors.maxlength" class="errorLable">Maximum length of your email should be at
+            most 50
+            characters</div>
+           <div *ngIf="f.email.errors.email" class="errorLable">Email format is wrong</div>
+        </div>
+        <input type="text"  formControlName="email" placeholder="{{user?.email}}" />
+      </div>
+
+      <div class="input">
+        <label class="center form--label">Profession</label>
+        <div class="center" *ngIf="f?.profession.errors">
+          <div *ngIf="f.profession.errors.minlength" class="errorLable">Minimum length of your profession should be at least
+            three characters</div>
+          <div *ngIf="f.profession.errors.maxlength" class="errorLable">Maximum length of your profession should be at
+            most 50
+            characters</div>
+        </div>
+        <input type="text"  formControlName="profession" placeholder="{{user?.profession}}" />
+      </div>
+
+      <div class="input">
+        <label class="center form--label">Age</label>
+        <div class="center" *ngIf=" f?.age.errors">
+          <div *ngIf="f.age.errors.pattern" class="errorLable">'Age' must be a natural number </div>
+        </div>
+        <input type="number"  min="1" max="100" formControlName="age"
+          placeholder="{{user?.age}}" />
+      </div>
+
+      <div class="input">
+        <label class="center form--label">Teach at</label>
+        <div class="center" *ngIf="f?.teachAt.errors">
+          <div *ngIf="f.teachAt.errors.minlength" class="errorLable">Minimum length of your 'teach at' field 
+            be at least three characters</div>
+          <div *ngIf="f.teachAt.errors.maxLength" class="errorLable">Maximum length of your 'teach at' filed should
+            be at most 50 characters</div>
+        </div>
+        <input type="text"  formControlName="teachAt" placeholder="{{user?.teachAt}}" />
+      </div>
+
+      <div class="input">
+          <label class="center form--label">Study at</label>
+          <div class="center" *ngIf="f?.studyAt.errors">
+            <div *ngIf="f.studyAt.errors.minlength" class="errorLable">Minimum length of your 'Study at' field 
+              be at least three characters</div>
+            <div *ngIf="f.studyAt.errors.maxLength" class="errorLable">Maximum length of your 'Study at' filed should
+              be at most 50 characters</div>
+          </div>
+          <input type="text"  formControlName="studyAt" placeholder="{{user?.studyAt}}" />
+        </div>
+
+      <div class="input">
+        <label class="center form--label">Description of your profile</label>
+        <div class="center" *ngIf="f?.description.errors">
+          <div *ngIf="f.description.errors.minlength" class="errorLable">Minimum length of your description should be at least 10
+            characters</div>
+          <div *ngIf="f.description.errors.maxlength" class="errorLable">Maximum length of your description should be most 1000
+            characters</div>
+        </div>
+        <textarea class="short-description" type="text" placeholder="{{user?.description}}"
+          formControlName="description"></textarea>
+      </div> 
+      <div class="center">
+        <button class="register--button ">Upload</button>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="lesson__container">
+      <div class="upload-file__container">
+        <div class="title center"> Upload and register profile image</div>
+        <div class="errorForm">
+            <p>{{errorMsg}}</p>
+          </div>
+          <div class="msg">
+            <p>{{msg}}</p>
+          </div>
+        <div class="upload-file">
+          <label class="upload-file--label">Profile image</label>
+          <app-upload-file (eventEmitter)="receiveEventForUploadAvatar($event)"></app-upload-file>
+        </div>
+        <div class="center">
+        <button class="register--button" (click) = "registerFile()">Register File</button>
+        </div>
+      </div>
+  </div>
+
+
+</div>

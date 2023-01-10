@@ -1,0 +1,109 @@
+
+.sign-in__container {
+    display: grid;
+    grid-template-columns: 32% 1fr 32% ;
+    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-areas: 
+                        ". .       ."
+                        ". wrapper ."
+                        ". .       .";
+    width:100%;
+    height: 100%;
+    /*background-image: radial-gradient(rgb(255, 255, 255) ,rgb(212, 212, 212));*/
+    } 
+
+    form{
+      display: grid;
+      grid-area: wrapper;
+      grid-template-columns: 100% ;
+      grid-template-rows:  0.1fr 1fr 1fr 0.2fr 1fr;
+      grid-template-areas: 
+                          " errorForm"
+                          " input-1 "
+                          " input-2 "
+                          " .       "
+                          " button  ";
+      padding: 4% 6% 6% 6% ;
+      border-style: solid;
+      border-color: rgb(136, 136, 136);
+      border-width: 1px;
+      box-shadow: 2px 2px 5px hsl(0, 0%, 80%);
+      transition: box-shadow 0.5s ease-out;
+    }
+    form:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+
+
+  .input1{
+    grid-area: input-1; 
+        min-height: 15vh;
+   }	
+  .input2{
+    grid-area: input-2; 
+        min-height: 15vh;
+   }	
+
+  .errorForm {
+      grid-area: errorForm;
+      font-weight: bold;
+      color:#974747;
+      text-align: center;
+      margin:0;
+      padding: 0;
+    }
+    .errorLable {
+      font-weight: bold;
+      color:#974747;
+      margin:0;
+      padding: 0;
+      height: 10%;
+    }
+
+    input{
+        border-style: solid;
+        border-width: 0 0 1px 0;
+        border-color: rgb(136, 136, 136);
+        outline: none;
+        height: 10vh;
+        width: 100%;
+       font-size: 300%;
+    }
+
+    input:focus::placeholder {
+       font-size: 75%;
+    }
+
+
+  input::placeholder{
+    font-family: "Roboto",sans-serif;
+    font-size: 15px;
+  }
+   button{
+    grid-area:button; 
+
+    outline: none;
+    font-family: "Roboto",sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.15rem;
+    background: inherit;
+    border-style: solid;
+    border-width: 1px; 
+    border-color: rgb(136, 136, 136);
+    min-height: 15vh;
+
+
+    transition: background-color  0.5s ease-out, color  0.5s ease-out;
+    -webkit-transition: background-color  0.5s ease-out, color  0.5s ease-out;
+  }
+
+  button:hover {
+    background-color: rgb(87, 87, 87);
+    color: rgb(194, 194, 194);
+  }
+
+
+ 
+
+  

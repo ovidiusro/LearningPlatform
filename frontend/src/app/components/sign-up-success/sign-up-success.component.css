@@ -1,0 +1,12 @@
+.root{
+    margin : 10%;
+    display: flex;
+    justify-content: center;
+}
+.message_success {
+    padding: 1%;
+
+    font-size: 3.4ch;
+    color: #4F8A10;
+    background-color: #DFF2BF;
+}

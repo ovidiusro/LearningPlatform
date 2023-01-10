@@ -1,0 +1,14 @@
+<div *ngIf="initialized" class="cards__container">
+    <div  *ngFor="let group of groups" class="card">
+        <a class="card--link" href="http://localhost:4200/home/group-details/{{group.id}}/overview">
+            <picture>
+                <img *ngIf="group.cover" class="card--img" src="{{httpRoot}} + {{group.cover.id}}" alt="The image is missing :)">
+                <img *ngIf="!group.cover" class="card--img" src="http://www.del-basket.ch/site/sites/default/files/default_images/flat-camera-icon_0.png" alt="The image is missing :)">
+            </picture>
+            <div class="card__content">
+                <h2 class="card-title">{{group.name}}</h2>
+                <p class="card--description">{{group.shortDescription}}</p>
+            </div>
+        </a>
+    </div>
+</div>

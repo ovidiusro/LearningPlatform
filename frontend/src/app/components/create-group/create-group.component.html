@@ -1,0 +1,46 @@
+<div class="sign-up__container">
+    <form class="sign-up-wrapper" [formGroup]="groupForm" (ngSubmit)="createGroup()">
+        <div class="errorForm">
+            <p>{{errorMsg}}</p>
+        </div>
+        <div class="msg">
+            <p>{{msg}}</p>
+        </div>
+
+        <div class="input">
+            <div *ngIf="submitted && f.name.errors">
+                <div *ngIf="f.name.errors.required" class="errorLable">Name is required</div>
+                <div *ngIf="f.name.errors.minlength" class="errorLable">Minimum length of your name should be at least three characters</div>
+                <div *ngIf="f.name.errors.maxlength" class="errorLable">Maximum length of your name should be at most 50 characters</div>
+            </div>
+            <input type="text" formControlName="name" placeholder="Name" />
+        </div>
+
+        <div class="input">
+            <div *ngIf="submitted && f.shortDescription.errors">
+                <div *ngIf="f.shortDescription.errors.required" class="errorLable">Short description is required</div>
+                <div *ngIf="f.shortDescription.errors.minlength" class="errorLable">Minimum length of your short description should be at least three characters</div>
+                <div *ngIf="f.shortDescription.errors.maxlength" class="errorLable">Maximum length of your short description should be at most 244 characters</div>
+            </div>
+            <textarea class="short-description" type="text" formControlName="shortDescription" placeholder="Short Description"></textarea>
+        </div>
+        <div class="input">
+            <div *ngIf="submitted && f.longDescription.errors">
+                <div *ngIf="f.longDescription.errors.required" class="errorLable">Short description is required</div>
+                <div *ngIf="f.longDescription.errors.minlength" class="errorLable">Minimum length of your long description should be at least six character</div>
+                <div *ngIf="f.longDescription.errors.maxlength" class="errorLable">Maximum length of your long description should be at most 15000 characters</div>
+            </div>
+            <textarea class="long-description" type="text" formControlName="longDescription" placeholder="Long Description"></textarea>
+        </div>
+        <div class = "upload-file">
+            <label class = "upload-file--label">Cover image</label>
+            <app-upload-file  (eventEmitter) = "receiveEventForCover($event)"></app-upload-file>
+        </div>
+        <div class="upload-file">
+            <label class = "upload-file--label">Banner image</label>
+            <app-upload-file  (eventEmitter) = "receiveEventForBanner($event)"></app-upload-file>
+        </div>
+        <button>Register</button>
+    </form>
+
+</div>

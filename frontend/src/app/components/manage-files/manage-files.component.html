@@ -1,0 +1,29 @@
+<div class="manage-lessons__container">
+
+  <div class="title"> Manage Files</div>
+  <div class="lesson__container">
+    <div class="lesson--label" *ngFor="let f of files; let i = index">
+      <button class="lesson--button" (click)="downloadFile(f?.id)"> Download </button>
+      {{i + 1}} |<span class = "file-name">{{f.name}} </span> <span class = "file-summary"> {{f.summary}}</span>
+      <button class="lesson--button right" (click)="removeFile(f?.id)"> Delete </button>
+    </div>
+  </div>
+
+  <div class="lesson__container">
+      <div class="title"> Upload and register files (one at a time)</div>
+      <div class="errorForm">
+          <p>{{uploadErrorMsg}}</p>
+        </div>
+        <div class="msg">
+          <p>{{uploadMsg}}</p>
+        </div>
+      <div class="upload-file">
+        <label class="upload-file--label">Upload files</label>
+        <app-upload-file (eventEmitter)="receiveEventForUploadFile($event)"></app-upload-file>
+      </div>
+      <div class="center">
+      <button class="register--button" (click) = "registerFile()">Register File</button>
+      </div>
+  </div>
+
+</div>

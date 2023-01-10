@@ -1,0 +1,82 @@
+.my__container {
+    display: grid;
+    grid-template-columns: 15% 70% 15% ;
+    grid-template-areas: 
+                        ". wrapper .";
+    width:100%;
+    min-height: 80vh;
+}
+
+.main {
+    grid-area: wrapper;
+    padding-top: 5%;
+}
+
+
+.main__body{
+    padding: 1%;
+}
+.title--small {
+    padding: 1%;
+    font-size: 2ch;
+    font-family: "Roboto",sans-serif;
+    color: #555;
+    text-align: center;
+}
+
+.title {
+    padding: 2%;
+    font-size: 5ch;
+    font-family: "Roboto",sans-serif;
+    color: #555;
+    text-align: center;
+}
+
+.description {
+    width: 100%;
+    font-size: 2.5ch;
+    color: #555;
+}
+.center{
+    display: flex;
+    justify-content: center;
+  }
+
+  .data a, .data span, .data tr, .data td, .data p { white-space: pre-wrap; }
+
+
+
+
+
+
+.lesson--label{
+    margin: 0.5%;
+    color:black;
+    border-top: 1px solid rgb(136, 136, 136);
+    font-size: 1.5ch;
+    height: auto;
+}
+
+.lesson__label--link{
+  text-decoration: none;
+  color: #555;
+}
+.lesson--button{
+  margin:0.5%;
+  padding: 1%;
+  outline: none;
+  font-size: 15px;
+  font-family: "Roboto",sans-serif;
+  letter-spacing: 0.15rem;
+  background: inherit;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgb(136, 136, 136);
+
+  transition: background-color  0.5s ease-out, color  0.5s ease-out;
+  -webkit-transition: background-color  0.5s ease-out, color  0.5s ease-out;
+}
+.lesson--button:hover {
+  background-color: #111;
+  color: #cccccccc;
+}

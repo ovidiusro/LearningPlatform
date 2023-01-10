@@ -1,0 +1,29 @@
+<div class="sign-in__container">
+
+
+        <form [formGroup]="signInForm" (ngSubmit)="sign_in()">
+
+            <div class="errorForm">
+                <p>{{errorMsg}}</p>
+            </div>
+
+            <div class="input1">
+                <div *ngIf="submitted && f.username.errors">
+                    <div *ngIf="f.username.errors.required"  class="errorLable">Username is required</div>
+                </div>
+                <input type="text" formControlName="username" placeholder="Username" />
+            </div>
+
+            <div class="input2">
+                <div *ngIf="submitted && f.password.errors" >
+                    <div  class="errorLable" *ngIf="f.password.errors.required">Password is required</div>
+                </div>
+                <input type="password" formControlName="password" placeholder="password" />
+            </div>
+
+            <button>Sign In</button>
+
+            </form>
+
+</div>
+  

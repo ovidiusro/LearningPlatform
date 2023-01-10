@@ -1,0 +1,20 @@
+<div class="manage-lessons__container">
+  
+  
+      <div class="title"> Manage Lessons</div>
+    <div class="lesson__container">
+      <div class="lesson--label" *ngFor="let l of lessons; let i = index">
+
+        <button class="lesson--button" (click)="navToOverview(l?.id)"> Overview </button>
+        <button class="lesson--button" (click)= "navToEdit(l?.id)"> Edit </button>
+
+        {{l.orderNumber}} | <a class="lesson__label--link" href="http://localhost:4200/lesson/{{l?.id}}"> {{l.title}} </a>
+
+           <button class="lesson--button right" (click)="deleteLesson(l?.id)"> Delete </button>
+      </div>
+      <div class="add__label">
+           <button class="add--button" (click) = "navToCreateLesson()" > Add Lesson </button>
+      </div>
+    </div>
+  
+</div>

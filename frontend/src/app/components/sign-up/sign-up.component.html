@@ -1,0 +1,54 @@
+<div class="sign-up__container">
+
+
+    <form class="sign-up-wrapper" [formGroup]="signUpForm" (ngSubmit)="signUp()">
+
+        <div class="errorForm">
+            <p>{{errorMsg}}</p>
+        </div>
+        <div class="msg">
+            <p>{{msg}}</p>
+        </div>
+
+        <div class="input">
+            <div *ngIf="submitted && f.name.errors">
+                <div *ngIf="f.name.errors.required" class="errorLable">Name is required</div>
+                <div *ngIf="f.name.errors.minlength" class="errorLable">Minimum length of your name should be at least three characters</div>
+            </div>
+            <input type="text" formControlName="name" placeholder="Name" />
+        </div>
+
+        <div class="input">
+            <div *ngIf="submitted && f.username.errors">
+                <div *ngIf="f.username.errors.required" class="errorLable">Username is required</div>
+                <div *ngIf="f.username.errors.minlength" class="errorLable">Minimum length of your username should be at least three characters</div>
+            </div>
+            <input type="text" formControlName="username" placeholder="Username" />
+        </div>
+        <div class="input">
+            <div *ngIf="submitted && f.email.errors">
+                <div *ngIf="f.email.errors.required" class="errorLable">Email is required</div>
+                <div *ngIf="f.email.errors.email" class="errorLable">Email format is wrong</div>
+            </div>
+            <input type="email" formControlName="email" placeholder="Email" />
+        </div>
+        <div class="input">
+            <div *ngIf="submitted && f.password.errors">
+                <div *ngIf="f.password.errors.required" class="errorLable">Passward is requeired</div>
+                <div *ngIf="f.password.errors.minlength" class="errorLable">Minimum length of your password should be at least six character</div>
+            </div>
+            <input type="password" formControlName="password" placeholder="Password" />
+        </div>
+        <div class="input">
+            <div *ngIf="submitted && f.confirmPassword.errors">
+                <div *ngIf="f.confirmPassword.errors.required" class="errorLable">Password confirmation is required</div>
+                <div *ngIf="f.confirmPassword.errors.minlength" class="errorLable">Minimum length of your passowrd should be at least six characte</div>
+            </div>
+            <input type="password" formControlName="confirmPassword" placeholder="Password confirmation" />
+        </div>
+
+        <button>Sign Up</button>
+
+    </form>
+
+</div>

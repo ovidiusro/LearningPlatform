@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<head lang="en">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+
+<div class="root">
+
+	<header class="header">
+		<div class="header__left-menu ">
+			<a class="header--link header--dark-transition" routerLink="home" routerLinkActive='active'>HOME</a>
+		</div>
+
+		<div class="header__center-menu">
+			<input class=" header--input header--dark-transition" #searchInput placeholder="Search.."  required>
+			<button class="header--btn header--dark-transition" (click) = "search(searchInput.value)"> <img class="button--img" src="https://cdn1.iconfinder.com/data/icons/hawcons/32/698627-icon-111-search-512.png" /> </button>
+
+		</div>
+
+		<div class="header__right-menu ">
+			<a class="header--link header--dark-transition" *ngIf="isLogged == false" routerLink="sign-in" routerLinkActive='active'>SIGN IN</a>
+			<a class="header--link header--dark-transition" *ngIf="isLogged == false" routerLink="sign-up" routerLinkActive='active'>SIGN UP</a>
+			<a class="header--link header--dark-transition" *ngIf="isLogged == true" routerLink="home/other/profile" routerLinkActive='active'>OTHER</a>
+			<a class="header--link header--dark-transition" *ngIf="isLogged == true" routerLink="" (click)="signOut()">SIGN OUT</a>
+		</div>
+	</header>
+
+	<!-- Main Content -->
+	<main class="content">
+		<router-outlet></router-outlet>
+	</main>
+
+	<!-- Footer -->
+	<div class="footer-container">
+		<footer class="footer-distributed">
+
+			<div class="footer-right">
+
+				<a href="#"><i class="fa fa-facebook"></i></a>
+				<a href="#"><i class="fa fa-twitter"></i></a>
+				<a href="#"><i class="fa fa-linkedin"></i></a>
+				<a href="#"><i class="fa fa-github"></i></a>
+
+			</div>
+
+			<div class="footer-left">
+
+				<p class="footer-links">
+					<a href="#">Home</a>
+					·
+					<a href="#">Blog</a>
+					·
+					<a href="#">Pricing</a>
+					·
+					<a href="#">About</a>
+					·
+					<a href="#">Faq</a>
+					·
+					<a href="#">Contact</a>
+				</p>
+
+				<p>Company Name &copy; 2015</p>
+			</div>
+
+		</footer>
+	</div>
+</div>
