@@ -9,8 +9,6 @@ import java.util.TimeZone;
 @SpringBootApplication
 public class UniverApplication {
 
-
-
 	@PostConstruct
 	void started() {
 		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));

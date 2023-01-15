@@ -43,13 +43,13 @@ public class TokenAuthenticationServiceImpl implements UserAuthenticationService
 
 
         Map<String,String > attributes = new HashMap <String, String>();
-        String roles = "";
+        StringBuilder roles = new StringBuilder();
         for(Role r: user.getRoles()){
-            roles += r.getCode() + " ";
+            roles.append(r.getCode()).append(" ");
         }
         attributes.put( "id" , String.valueOf(user.getId()));
         attributes.put("username", user.getUsername());
-        attributes.put("roles", roles);
+        attributes.put("roles", roles.toString());
 
 
         String token = tokenService.expiring(attributes);

@@ -1,6 +1,9 @@
 package com.hozan.univer.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.search.annotations.Field;
@@ -18,6 +21,9 @@ import java.util.Optional;
 @Entity
 @Table(name = "Groupp")
 @Indexed
+@Getter
+@Setter
+@NoArgsConstructor
 public class  Group extends  AbstractEntity{
 
     public interface GroupForm{}
@@ -67,25 +73,9 @@ public class  Group extends  AbstractEntity{
     @ManyToOne
     private File cover;
 
-    public Group() { }
-
     public Group(String name, String shortDescription) {
         this.name = name;
         this.shortDescription = shortDescription;
-    }
-
-    public String getName() { return name; }
-
-    public void setName(String name) { this.name = name; }
-
-    public String getShortDescription() { return shortDescription; }
-
-    public void setShortDescription(String shortDescription) { this.shortDescription = shortDescription; }
-
-
-    //Owner
-    public Account getOwner() {
-        return owner;
     }
 
     public void setOwner(Account owner) {
@@ -103,17 +93,6 @@ public class  Group extends  AbstractEntity{
         }
         owner.removeOwnGroup(this);
         owner = null;
-    }
-
-    //followers
-    public Collection<Account> getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(Collection<Account> followers) {
-        for(Account a: followers){
-            addFollower(a);
-        }
     }
 
     public void addFollower(Account account)
@@ -135,14 +114,6 @@ public class  Group extends  AbstractEntity{
         account.stopFollowingGroup(this);
     }
 
-    public Collection<Lesson> getLessons() {
-        return lessons;
-    }
-
-    public void setLessons(Collection<Lesson> lessons) {
-        this.lessons = lessons;
-    }
-
     public void addLesson(Lesson lesson){
         this.lessons.add(lesson);
     }
@@ -158,27 +129,4 @@ public class  Group extends  AbstractEntity{
         lessons.removeIf(l -> l.getId().equals(id));
     }
 
-    public File getBanner() {
-        return banner;
-    }
-
-    public void setBanner(File banner) {
-        this.banner = banner;
-    }
-
-    public String getLongDescription() {
-        return longDescription;
-    }
-
-    public void setLongDescription(String longDescription) {
-        this.longDescription = longDescription;
-    }
-
-    public File getCover() {
-        return cover;
-    }
-
-    public void setCover(File cover) {
-        this.cover = cover;
-    }
 }

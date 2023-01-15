@@ -1,6 +1,7 @@
 package com.hozan.univer.web.api;
 
 
+import com.hozan.univer.exception.InternalException;
 import com.hozan.univer.model.Account;
 import com.hozan.univer.model.File;
 import com.hozan.univer.model.Group;
@@ -9,7 +10,6 @@ import com.hozan.univer.security.UserAuthenticationService;
 import com.hozan.univer.service.AccountService;
 import com.hozan.univer.service.FileContentService;
 import com.hozan.univer.service.FileService;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -40,19 +40,21 @@ public class AccountController extends BaseController{
     private FileService fileService;
     private FileContentService fileContentService;
 
-
     @Autowired
-    public AccountController(AccountService accountService, UserAuthenticationService userAuthenticationService, FileService fileService, FileContentService fileContentService) {
+    public AccountController(AccountService accountService,
+                             UserAuthenticationService userAuthenticationService,
+                             FileService fileService,
+                             FileContentService fileContentService) {
+
         this.accountService = accountService;
         this.userAuthenticationService = userAuthenticationService;
         this.fileService = fileService;
         this.fileContentService = fileContentService;
     }
 
-
     @PostMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<Account> updateAccount(@RequestBody Account bodyAccount, @PathVariable(value = "id") Long id ){
-        logger.info("< updateAccount ", id);
+        logger.info("< updateAccount: {}", id);
 
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
@@ -62,7 +64,6 @@ public class AccountController extends BaseController{
         if(!account.isPresent()){
             return new  ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
 
         if(!bodyAccount.getName().isEmpty()){
             Set<ConstraintViolation<Account>> constraintViolations = validator.validate(bodyAccount, Account.ValidateName.class);
@@ -152,7 +153,7 @@ public class AccountController extends BaseController{
 
         Optional<Account> updatedAccount = accountService.update(account.get());
 
-        logger.info("> updateAccount ", id);
+        logger.info("> updateAccount: {}", id);
         return new  ResponseEntity<Account>(updatedAccount.get(),HttpStatus.OK);
     }
 
@@ -184,7 +185,6 @@ public class AccountController extends BaseController{
         return new ResponseEntity<>(groups, HttpStatus.OK);
     }
 
-
     @GetMapping(value = "/avatar/{userId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAvatar(@PathVariable("userId")Long accountId){
         logger.info("< getAvatar accountId:{}", accountId);
@@ -207,11 +207,9 @@ public class AccountController extends BaseController{
         return new ResponseEntity<Object>(inputStreamResource, headers, HttpStatus.OK);
     }
 
-
     @PostMapping(value = "/avatar")
     public ResponseEntity<Group> setAvatar(@RequestParam("accountId")Long accountId, @RequestParam("fileId")Long fileId){
         logger.info("< setAvatar  accountId:{} fileId id:{}", accountId, fileId);
-
 
         Optional<Account> account = accountService.getById(accountId);
         Optional<File> avatar = fileService.getById(fileId);
@@ -236,9 +234,8 @@ public class AccountController extends BaseController{
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
     @PostMapping (value = "/sign-in",  produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<TokenResponse> signIn(@Validated(Account.SignInForm.class) @RequestBody   Account account) {
+    ResponseEntity<TokenResponse> signIn(@Validated(Account.SignInForm.class) @RequestBody  Account account) {
         logger.info("< sign-in ");
 
          String tokenStr  = userAuthenticationService.login(account.getUsername(),account.getPassword());
@@ -256,7 +253,6 @@ public class AccountController extends BaseController{
     ResponseEntity<Boolean> signOut(Principal principal) {
         logger.info("< sign-out ");
 
-
         Optional<Account> account = accountService.getByUsername(principal.getName());
 
         if(!account.isPresent()){
@@ -265,20 +261,15 @@ public class AccountController extends BaseController{
 
         userAuthenticationService.logout(account.get());
 
-
         logger.info("> sign-out ");
         return new ResponseEntity<Boolean>(true,HttpStatus.OK);
     }
-
-
 
     @GetMapping(value = "/current", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Principal> getUser(Principal principal) {
         logger.info("<> getUser ");
 
-
         return new ResponseEntity<>(principal,HttpStatus.OK);
-
     }
 
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE )
@@ -295,8 +286,6 @@ public class AccountController extends BaseController{
         return new  ResponseEntity<>(accounts.get(),HttpStatus.OK);
     }
 
-
-
     @GetMapping(value = "/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<Account> getById(@PathVariable(value = "id") @NotNull Long id){
         logger.info("< getById id:{}", id);
@@ -307,12 +296,9 @@ public class AccountController extends BaseController{
             return new  ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-
         logger.info("> getById id:{}", id);
         return new  ResponseEntity<Account>(account.get(),HttpStatus.OK);
     }
-
-
 
     @GetMapping(value = "/username/{username}", produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<Account> getByUsername(@PathVariable(value = "username") String username){

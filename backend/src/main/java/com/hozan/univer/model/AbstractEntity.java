@@ -1,5 +1,7 @@
 package com.hozan.univer.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,6 @@ import static java.util.function.DoubleUnaryOperator.identity;
 
 @MappedSuperclass
 public abstract class AbstractEntity<I>  implements Entity<I>{
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -60,7 +61,5 @@ public abstract class AbstractEntity<I>  implements Entity<I>{
     @Override
     public String toString() {
         return getClass().getSimpleName() + ": " + identity();
-        // OR
-        // return ReflectionToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

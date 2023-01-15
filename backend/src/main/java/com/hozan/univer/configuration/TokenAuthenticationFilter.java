@@ -31,7 +31,6 @@ class TokenAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
             final HttpServletResponse response) {
 
 
-
         final String param = ofNullable(request.getHeader(AUTHORIZATION))
                 .orElse(request.getParameter("t"));
 

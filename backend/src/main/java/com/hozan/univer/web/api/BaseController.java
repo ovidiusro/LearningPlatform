@@ -1,8 +1,8 @@
 package com.hozan.univer.web.api;
 
+import com.hozan.univer.exception.InternalException;
 import com.hozan.univer.web.DefaultExceptionAttributes;
 import com.hozan.univer.web.ExceptionAttributes;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.persistence.EntityExistsException;
@@ -21,9 +22,9 @@ import javax.validation.ConstraintViolationException;
 import java.io.IOException;
 import java.util.Map;
 
+@ControllerAdvice
 public class BaseController {
    protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Map<String, Object>> handleConstraintViolationException(

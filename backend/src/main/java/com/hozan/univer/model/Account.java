@@ -1,6 +1,10 @@
 package com.hozan.univer.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,9 +17,13 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Account  extends  AbstractEntity implements UserDetails {
 
     public interface SignUpForm{}
@@ -81,8 +89,6 @@ public class Account  extends  AbstractEntity implements UserDetails {
     @Size(min = 10, max = 1000, message = "length requirements of  description:  min = 10, max = 1000 ", groups = {ValidateDescription.class})
     private String description;
 
-
-
     @OneToMany (mappedBy = "owner",  orphanRemoval = true)
     @JsonIgnore
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -102,14 +108,15 @@ public class Account  extends  AbstractEntity implements UserDetails {
     @ManyToOne
     private File avatar;
 
+    @JsonIgnore
     private boolean enabled = true;
+    @JsonIgnore
     private boolean credentialsExpired = false;
+    @JsonIgnore
     private boolean expired = false;
+    @JsonIgnore
     private boolean locked = false;
     
-
-    public Account() { }
-
     public Account(String name, String email, String username, String password, Date creationDate) {
         this.name = name;
         this.email = email;
@@ -125,59 +132,6 @@ public class Account  extends  AbstractEntity implements UserDetails {
         this.creationDate = creationDate;
     }
 
-
-    @Override
-    @JsonIgnore
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    @JsonIgnore
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
-    }
-
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
-    public boolean isEnabled() { return enabled; }
-    public void setEnabled(boolean enabled) { this.enabled = enabled; }
-    public boolean isCredentialsExpired() { return credentialsExpired; }
-    public void setCredentialsExpired(boolean credentialsExpired) { this.credentialsExpired = credentialsExpired; }
-    public boolean isExpired() { return expired; }
-    public void setExpired(boolean expired) { this.expired = expired; }
-    public boolean isLocked() { return locked; }
-    public void setLocked(boolean locked) { this.locked = locked; }
-    public Date getCreationDate() { return creationDate; }
-    public void setCreationDate(Date creationDate) { this.creationDate = creationDate; }
-
-    //Roles
-    public Collection<Role> getRoles() { return roles; }
-
-    public void setRoles(Collection<Role> roles) {
-        for(Role r: roles){
-            addRole(r);
-        }
-    }
-
     public void addRole(Role role) {
         if(this.roles.contains(role)){
             return;
@@ -191,16 +145,6 @@ public class Account  extends  AbstractEntity implements UserDetails {
         }
         this.roles.remove(role);
         role.removeAccount(this);
-    }
-
-
-    // Own groups
-    public Collection<Group> getOwnGroups() { return ownGroups; }
-
-    public void setOwnGroups(Collection<Group> groups){
-        for(Group g:groups){
-            addOwnGroup(g);
-        }
     }
 
     public void addOwnGroup(Group ownGroup)
@@ -221,21 +165,9 @@ public class Account  extends  AbstractEntity implements UserDetails {
        ownGroup.setOwner(null);
     }
 
-    //Following groups
-    public Collection<Group> getFollowingGroups() {
-        return followingGroups;
-    }
-
-    public void setFollowingGroups(Collection<Group> groups){
-
-        for(Group g: groups){
-            startFollowingGroup(g);
-        }
-
-    }
     public void startFollowingGroup(Group group)
     {
-        if(followingGroups.contains(group)){
+        if(this.followingGroups.contains(group)){
             return;
         }
 
@@ -252,51 +184,36 @@ public class Account  extends  AbstractEntity implements UserDetails {
          group.removeFollower(this);
     }
 
-    public File getAvatar() {
-        return avatar;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.EMPTY_LIST;
     }
 
-    public void setAvatar(File avatar) {
-        this.avatar = avatar;
+    @Override
+    public boolean isAccountNonExpired() {
+        return !this.expired;
     }
 
-    public String getProfession() {
-        return profession;
+    @Override
+    public boolean isAccountNonLocked() {
+        return !this.locked;
     }
 
-    public void setProfession(String profession) {
-        this.profession = profession;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return !this.credentialsExpired;
     }
 
-    public String getAge() {
-        return age;
+    @Override
+    public boolean isEnabled (){
+        return this.enabled;
     }
-
-    public void setAge(String age) {
-        this.age = age;
+    @Override
+    public String getUsername(){
+        return this.username;
     }
-
-    public String getTeachAt() {
-        return teachAt;
-    }
-
-    public void setTeachAt(String teachAt) {
-        this.teachAt = teachAt;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getStudyAt() {
-        return studyAt;
-    }
-
-    public void setStudyAt(String studyAt) {
-        this.studyAt = studyAt;
+    @Override
+    public String getPassword(){
+        return this.password;
     }
 }

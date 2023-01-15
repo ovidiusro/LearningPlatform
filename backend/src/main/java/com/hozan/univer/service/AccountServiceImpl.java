@@ -27,9 +27,6 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepo;
     private final PasswordEncoder passwordEncoder;
 
-
-
-
     @Autowired
     public AccountServiceImpl(AccountRepository accountRepository, PasswordEncoder passwordEncoder) {
         this.accountRepo = accountRepository;

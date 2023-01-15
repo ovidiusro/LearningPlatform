@@ -14,7 +14,6 @@ public interface AccountService {
     void        remove(Long id);
     void        evictCache();
 
-
     Optional<Account>       getByUsername(String usernme);
     Optional<Account>       getByEmail(String usernme);
 }

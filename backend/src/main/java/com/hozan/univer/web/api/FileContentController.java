@@ -1,10 +1,10 @@
 package com.hozan.univer.web.api;
 
+import com.hozan.univer.exception.InternalException;
 import com.hozan.univer.model.File;
 import com.hozan.univer.service.FileContentService;
 import com.hozan.univer.service.FileService;
 import com.hozan.univer.service.MultipartFileSender;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -28,14 +28,10 @@ import static java.lang.Math.min;
 @RequestMapping(value = "/api/files")
 public class FileContentController extends BaseController {
 
-
     @Autowired
     private FileContentService contentService;
     @Autowired
     private FileService fileService;
-
-
-
 
     @PostMapping(value = "/{fileId}")
     public ResponseEntity<?> createFileContent(@PathVariable("fileId") Long id, @RequestParam("file") MultipartFile file) throws IOException {
@@ -150,7 +146,6 @@ public class FileContentController extends BaseController {
         logger.info("> getRangeVideo idVideo: {}", idVideo) ;
         }
 
-
     @GetMapping("/videoss/{idVideo}")
     public  ResponseEntity<?> getVideo(@PathVariable  Long idVideo, @RequestHeader HttpHeaders headers) throws IOException {
 
@@ -167,8 +162,6 @@ public class FileContentController extends BaseController {
         resHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         resHeaders.setContentLength(videoContent.length);
 
-        //InputStreamResource resource = new InputStreamResource(new ByteArrayInputStream(videoContent));
-
         ByteArrayResource byteArrayResource = new ByteArrayResource(videoContent);
         return new  ResponseEntity<ByteArrayResource> (byteArrayResource,resHeaders, HttpStatus.PARTIAL_CONTENT);
     }
@@ -182,7 +175,6 @@ public class FileContentController extends BaseController {
             int start = (int)range.get(0).getRangeStart(contentLength);
             int end = (int)range.get(0).getRangeEnd(contentLength);
             int rangeLength = (int)min(1 * 1024 * 1024, end - start + 1);
-           //  int rangeLength = (int)(end - start - 1);
              byte[] partialVideo = new byte[rangeLength];
 
              int j = 0;

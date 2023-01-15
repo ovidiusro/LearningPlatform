@@ -1,12 +1,12 @@
 package com.hozan.univer.web.api;
 
 import com.hozan.univer.dto.HibernateSearchService;
+import com.hozan.univer.exception.InternalException;
 import com.hozan.univer.model.Account;
 import com.hozan.univer.model.File;
 import com.hozan.univer.model.Group;
 import com.hozan.univer.model.Lesson;
 import com.hozan.univer.service.*;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.core.io.InputStreamResource;
@@ -53,7 +53,6 @@ public class GroupController extends BaseController{
         this.hibernateSearchService = hibernateSearchService;
     }
 
-
     @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<Collection<Group>> getSearchedGroup(@RequestParam("searchTerm") String searchTerm)  {
         logger.info("< getSearchedGroup ");
@@ -62,7 +61,7 @@ public class GroupController extends BaseController{
 
         logger.info("> getSearchedGroup ");
         return new  ResponseEntity<>(groups, HttpStatus.OK);
-}
+    }
 
     @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<Collection<Group>> getAllGroup(){
@@ -90,6 +89,7 @@ public class GroupController extends BaseController{
         logger.info("> getOwner") ;
         return new ResponseEntity<>(group.get().getOwner(),HttpStatus.OK);
     }
+
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<Group> getById(@PathVariable(value = "id") long id){
         logger.info("< getById id:{}", id);
@@ -106,7 +106,7 @@ public class GroupController extends BaseController{
 
     @GetMapping(value = "/{groupId}/lesson/all")
     public ResponseEntity<?> getAllLesson(@PathVariable("groupId")Long groupId){
-        logger.info("< getAllLessons groupId :{},",groupId);
+        logger.info("< getAllLessons groupId :{},", groupId);
 
         Optional<Group> group = this.groupService.getById(groupId);
 
@@ -118,14 +118,13 @@ public class GroupController extends BaseController{
         lessons.sort(Comparator.comparing(Lesson::getOrderNumber));
 
 
-        logger.info("> getAllLessons groupId :{},",groupId);
+        logger.info("> getAllLessons groupId :{},", groupId);
         return new ResponseEntity<>(lessons, HttpStatus.OK);
-
     }
 
     @GetMapping(value = "/{groupId}/lesson/{idLesson}")
     public ResponseEntity<?> getAllLesson(@PathVariable("groupId")Long groupId, @PathVariable("idLesson")Long idLesson){
-        logger.info("< getAllLessons groupId :{},",groupId);
+        logger.info("< getAllLessons groupId :{},", groupId);
 
         Optional<Group> group = this.groupService.getById(groupId);
 
@@ -140,15 +139,13 @@ public class GroupController extends BaseController{
             }
         }
 
-
         logger.info("> getAllLessons groupId :{},",groupId);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
     }
 
     @PostMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE )
     public ResponseEntity<Group> updateGroup(@RequestBody Group bodyGroup, @PathVariable(value = "id") Long id) {
-        logger.info("< updateGroup ", id);
+        logger.info("< updateGroup: {}", id);
 
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
@@ -189,7 +186,7 @@ public class GroupController extends BaseController{
 
         Optional<Group> updatedGroup = groupService.update(group.get());
 
-        logger.info("> updateGroup", id);
+        logger.info("> updateGroup: {}", id);
         return new  ResponseEntity<Group>(updatedGroup.get(),HttpStatus.OK);
     }
 
@@ -298,12 +295,11 @@ public class GroupController extends BaseController{
 
         logger.info("> setBanner groupId:{} fileId:{}",groupId, fileId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
     }
 
     @PostMapping(value = "/{groupId}/lesson/{lessonId}")
     public ResponseEntity<?> addLesson(@PathVariable("groupId")Long groupId, @PathVariable("lessonId") Long lessonId){
-        logger.info("< addLesson groupId :{}, lessonId",groupId,lessonId);
+        logger.info("< addLesson groupId :{}, lessonId: {}",groupId, lessonId);
         Optional<Lesson> lesson = this.lessonService.getById(lessonId);
         Optional<Group> group = this.groupService.getById(groupId);
 
@@ -314,14 +310,13 @@ public class GroupController extends BaseController{
         group.get().addLesson(lesson.get());
         this.groupService.update(group.get());
 
-        logger.info("> addLesson groupId :{}, lessonId",groupId,lessonId);
+        logger.info("> addLesson groupId :{}, lessonId: {}",groupId,lessonId);
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
     @DeleteMapping(value = "/{groupId}/lesson/{lessonId}")
     public ResponseEntity<?> removeLesson(@PathVariable("groupId")Long groupId, @PathVariable("lessonId") Long lessonId){
-        logger.info("< removeLesson groupId :{}, lessonId",groupId,lessonId);
+        logger.info("< removeLesson groupId :{}, lessonId: {}",groupId,lessonId);
 
         Optional<Lesson> lesson = this.lessonService.getById(lessonId);
         Optional<Group> group = this.groupService.getById(groupId);
@@ -334,9 +329,8 @@ public class GroupController extends BaseController{
         this.groupService.update(group.get());
         this.lessonService.remove(lessonId);
 
-        logger.info("> removeLesson groupId :{}, lessonId",groupId,lessonId);
+        logger.info("> removeLesson groupId :{}, lessonId: {}",groupId,lessonId);
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
 
@@ -354,8 +348,6 @@ public class GroupController extends BaseController{
         return new ResponseEntity<>(group.get().getFollowers(),HttpStatus.OK);
     }
 
-
-
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Group> createGroup(@RequestBody @Validated(Group.GroupForm.class) Group group){
@@ -370,22 +362,6 @@ public class GroupController extends BaseController{
         logger.info("> createGroup");
         return new ResponseEntity<>(createdGroup.get(),HttpStatus.CREATED);
     }
-
-//    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-//            produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<Group> updateGroup(@RequestBody @Validated(Group.GroupForm.class) Group bodyGroup)
-//    {
-//        logger.info("< updateGroup id:{}", bodyGroup.getId());
-//
-//        Optional<Group> updatedGroup = groupService.update(bodyGroup);
-//
-//        if(!updatedGroup.isPresent()) {
-//            throw  new InternalException("Group was not updated");
-//        }
-//
-//        logger.info("> updateGourp id:{}", bodyGroup.getId());
-//        return new ResponseEntity<>(bodyGroup,HttpStatus.OK);
-//    }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Group> deleteGroup(@PathVariable("id") Long id){
@@ -411,7 +387,6 @@ public class GroupController extends BaseController{
 
         logger.info("> deleteGroup id:{}", id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
     }
 
     @PostMapping(value = "/{groupId}/owner/{accountId}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -463,7 +438,6 @@ public class GroupController extends BaseController{
 
         logger.info("> addFollower id:{} in group id:{}",followerId,groupId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-
     }
 
     @DeleteMapping(value = "/{groupId}/follower/{followerId}")
