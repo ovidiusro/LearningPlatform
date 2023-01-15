@@ -1,19 +1,19 @@
 <div class="my__container">
   <article class="main">
-   
-      <div class="title">{{group?.name}}</div>
-      <nav class="main__nav dark-transition">
 
-          <a class="nav__button" routerLink="overview" routerLinkActive='active'>
-            Overview
-          </a>
-          <a class="nav__button" routerLink="courses" routerLinkActive='active'>
-            Courses
-          </a>
-        </nav>
+    <div class="title">{{group?.name}}</div>
+    <nav class="main__nav dark-transition">
 
-      <div class="main__body">
-        <router-outlet></router-outlet>
-      </div>
+      <a class="nav__button" routerLink="overview" routerLinkActive='active'>
+        Overview
+      </a>
+      <a class="nav__button" routerLink="courses" routerLinkActive='active'>
+        Courses
+      </a>
+    </nav>
+
+    <div class="main__body">
+      <router-outlet></router-outlet>
+    </div>
   </article>
 </div>

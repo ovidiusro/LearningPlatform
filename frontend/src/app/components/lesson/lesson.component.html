@@ -1,7 +1,7 @@
 <div class="my__container">
   <article class="main">
 
-    <div class="title">{{lesson?.orderNumber}}. {{lesson?.title}} </div>
+    <div class="title">{{lesson?.orderNumber}}. {{lesson?.title}}</div>
     <div class="main__body">
       <div *ngIf="lesson?.video?.id">
         <video width="100%" height="" controls>
@@ -18,7 +18,7 @@
     <div *ngIf="lesson?.files">
       <div class="title--small ">Files</div>
       <div class="lesson--label" *ngFor="let f of lesson.files; let i = index">
-        <button class="lesson--button" (click)="downloadFile(f?.id)"> Download </button>
+        <button class="lesson--button" (click)="downloadFile(f?.id)"> Download</button>
         {{i + 1}} |<span class="file-name">{{f.name}} </span> <span class="file-summary"> {{f.summary}}</span>
       </div>
     </div>

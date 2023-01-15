@@ -1,21 +1,21 @@
 <picture>
-    <img *ngIf = "http" class="picture--banner"   src="{{http}}" >
-    <img *ngIf = "!http" class="picture--banner"   src="http://www.3ciemme.it/images/joomlart/demo/default.jpg" >
-  </picture>
+  <img *ngIf="http" class="picture--banner" src="{{http}}">
+  <img *ngIf="!http" class="picture--banner" src="http://www.3ciemme.it/images/joomlart/demo/default.jpg">
+</picture>
 
 
-  <div class="description data">
-      <p>
+<div class="description data">
+  <p>
     {{group.longDescription}}
-      </p>
-  </div>
+  </p>
+</div>
 
-  <div class = "button--dark-transition ">
-    <div *ngIf = "!subscribed"  (click) = "subscribing()" class = "button--big">
-        SUBSCRIBE
-    </div>
-    <div *ngIf = "subscribed && isLogged" (click) = "unsubscribing()" class = "button--big">
-        UNSUBSCRIBE
-    </div>
+<div class="button--dark-transition ">
+  <div *ngIf="!subscribed" (click)="subscribing()" class="button--big">
+    SUBSCRIBE
   </div>
+  <div *ngIf="subscribed && isLogged" (click)="unsubscribing()" class="button--big">
+    UNSUBSCRIBE
+  </div>
+</div>
 

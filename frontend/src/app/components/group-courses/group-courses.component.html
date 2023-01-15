@@ -3,7 +3,8 @@
   <div class="container__left">
     <div class="center">
       <img *ngIf="http" class="picture--round" src="{{http}}">
-      <img *ngIf="!http" class="picture--round" src="https://www.viadelvino.com/wp-content/uploads/2016/02/photo.jpg.png">
+      <img *ngIf="!http" class="picture--round"
+           src="https://www.viadelvino.com/wp-content/uploads/2016/02/photo.jpg.png">
     </div>
     <div class="description">
       <p>
@@ -32,13 +33,13 @@
 </div>
 
 <div class="lecture__container">
-  <div *ngFor="let l of lessons; let i = index" class="lecture__label" >
-    <div  data-toggle="collapse" (click)="isCollapsed[i] = !isCollapsed[i]">
+  <div *ngFor="let l of lessons; let i = index" class="lecture__label">
+    <div data-toggle="collapse" (click)="isCollapsed[i] = !isCollapsed[i]">
       <label>
         <span *ngIf="isCollapsed[i]">+</span>
         <span *ngIf="!isCollapsed[i]">-</span>
         {{l.orderNumber}} | <a class="lesson__label--link" href="http://localhost:4200/lesson/{{l?.id}}"> {{l.title}}
-        </a>
+      </a>
       </label>
     </div>
     <div [ngbCollapse]="isCollapsed[i]">

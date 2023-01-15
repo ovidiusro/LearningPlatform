@@ -1,16 +1,17 @@
 <div class="root">
-    <div class="cards__container">
-        <div *ngFor="let group of groups" class="card">
-            <a class="card--link" routerLink="group-details/{{group.id}}/overview">
-                <picture>
-                    <img *ngIf="group.cover" class="card--img" src="{{httpRoot}} + {{group.cover.id}}">
-                    <img *ngIf="!group.cover" class="card--img" src="http://www.del-basket.ch/site/sites/default/files/default_images/flat-camera-icon_0.png">
-                </picture>
-                <div class="card__content">
-                    <h2 class="card-title">{{group.name}}</h2>
-                    <p class="card--description">{{group.shortDescription}}</p>
-                </div>
-            </a>
+  <div class="cards__container">
+    <div *ngFor="let group of groups" class="card">
+      <a class="card--link" routerLink="group-details/{{group.id}}/overview">
+        <picture>
+          <img *ngIf="group.cover" class="card--img" src="{{httpRoot}} + {{group.cover.id}}">
+          <img *ngIf="!group.cover" class="card--img"
+               src="http://www.del-basket.ch/site/sites/default/files/default_images/flat-camera-icon_0.png">
+        </picture>
+        <div class="card__content">
+          <h2 class="card-title">{{group.name}}</h2>
+          <p class="card--description">{{group.shortDescription}}</p>
         </div>
+      </a>
     </div>
+  </div>
 </div>
