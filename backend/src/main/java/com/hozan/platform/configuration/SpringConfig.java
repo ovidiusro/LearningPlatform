@@ -7,7 +7,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
-import org.springframework.content.fs.config.EnableFilesystemStores;
 import org.springframework.context.annotation.Bean;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -18,7 +17,6 @@ import java.nio.file.Files;
 
 @EnableCaching
 @EnableTransactionManagement
-@EnableFilesystemStores
 public class SpringConfig {
 
     @Bean
@@ -46,11 +44,4 @@ public class SpringConfig {
         return DateTimeZone.UTC;
     }
 
-    @Bean
-    File filesystemRoot() {
-        try {
-            return Files.createTempDirectory("").toFile();
-        } catch (IOException ignored) {}
-        return null;
-    }
 }
