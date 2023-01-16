@@ -11,10 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-
 @EnableCaching
 @EnableTransactionManagement
 public class SpringConfig {
